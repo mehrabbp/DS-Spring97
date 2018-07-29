@@ -1,0 +1,24 @@
+def f(n):
+	if n == int(n):
+		return int(n)
+	else:
+		return n
+
+n, w = map(int, input().split())
+l = sorted([ int(i) for i in input().split() ])
+#print(l[len(l) - 1] * n + l[len(l) - 1] / 2 * n)
+t = int(len(l)/2)
+
+#	if l[t]/2 <= l[0]:
+	# 	if l[t]  <= l[int(len(l)/2)]:
+	# 		break;
+	# t-=1
+	
+if l[t] <= 2*l[0]:
+	scale = l[t] * n + l[t]/2 * n
+if l[t] > 2*l[0]:
+	scale = 3*n*l[0]
+if scale < w:
+	print(f(scale))
+else:
+	print(w)
