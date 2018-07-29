@@ -1,0 +1,40 @@
+# post = [4, 2, 7, 5, 9, 8, 6, 3, 1]
+# inor = [4, 2, 1, 5, 7, 3, 6, 8, 9]
+
+class Node:
+    def __init__(self,v):
+        self.v = v
+        self.l = None
+        self.r = None
+
+def build(post,inor):
+    assert len(post)==len(inor)
+    if not post:
+        return None
+
+    root = Node(post[-1])
+    if len(post)==1:
+        return root
+
+    for i in range(len(inor)): #finding index of root in inorder, in i
+        if inor[i] == root.v:
+            break
+
+    root.l = build(post[:i],inor[:i]) #both arrays from 0 to index i
+    root.r = build(post[i:-1],inor[i+1:]) #post skips last value, which is root
+    return root
+
+def pre(r, a):
+    if r==None:return
+
+    a.append(r.v)
+    pre(r.l, a)
+    pre(r.r, a)
+
+input()
+inor = [int(i) for i in input().split()]
+post = [int(i) for i in input().split()]
+r = build(post,inor)
+a = []
+pre(r, a)
+print(*a, sep = ' ')
