@@ -1,0 +1,21 @@
+g, n = map(int, input().split())
+a = []
+b = [int(i) for i in input().split()]
+c = [int(i) for i in input().split()]
+for i in range(0, n):
+	a.append([b[i],c[i]])
+
+b = sorted(a, key = lambda l:l[0]/l[1], reverse=True)
+#print(b)
+temp = 0
+value = 0
+# while temp <= g:
+	# value += 
+for i in range(0, n):
+	temp += b[i][1]
+	if temp > g:
+		temp -= b[i][1]
+		value += (g-temp) / b[i][1] * b[i][0]
+		break
+	value += b[i][0]
+print(value)
