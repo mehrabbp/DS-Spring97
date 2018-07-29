@@ -1,0 +1,58 @@
+import math
+def search(number, low, high, arr = []):
+  if (high < low):
+    return -1
+  mid = (high + low) / 2
+  if (number == arr[mid]):
+    return mid
+  if (number > arr[mid]):
+    return search(number, (mid + 1), high, arr)
+  else:
+    return search(number, low, (mid - 1), arr)
+def insert(number, arr = []):
+  i = len(arr) - 1
+  arr.append(0)
+  while ((i >= 0) and (arr[i] > number)):
+    arr[i + 1] = arr[i]
+    i = i - 1
+  arr[i + 1] = number
+
+def remove(number, arr = []):
+  index = search(number, 0, len(arr) - 1, arr)
+  if index == -1:
+    return -1
+  else:
+    for i in range(index, len(arr) - 1):
+      arr[i] = arr[i + 1]
+    del arr[len(arr) - 1]
+
+def fm(arr = []):
+  if ((len(arr) % 2) == 1):
+    return arr[(len(arr) - 1) / 2]
+  else:
+    return float(float((arr[len(arr) / 2]) + float(arr[(len(arr) / 2) - 1])) / 2)
+
+index = 0
+arr = []
+out = []
+num_of_lines = int(raw_input())
+for i in range(0, num_of_lines):
+  order, num = raw_input().split(" ")
+  number = int(num)
+  if order == "cancel":
+    index = remove(number, arr)
+    if ((index == -1) or (len(arr) == 0)):
+      out.append("Error!")
+    else:  
+      if (fm(arr) == int(fm(arr))): 
+        out.append(int(fm(arr)))
+      elif (fm(arr) != int(fm(arr))):
+        out.append(round(fm(arr), 1))
+  else:
+    insert(number, arr)
+    if (fm(arr) == int(fm(arr))): 
+        out.append(int(fm(arr)))
+    elif (fm(arr) != int(fm(arr))):
+        out.append(round(fm(arr), 1))
+for i in out:
+  print i
