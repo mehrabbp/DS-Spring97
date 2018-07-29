@@ -1,0 +1,17 @@
+n, m, k = [int(i) for i in input().split()]
+a = []
+for i in range(n):
+	a.insert(0, input())
+for i in range(m):
+	inputt = input()
+	if (inputt[0] == 'A'):
+		a.append(inputt.split("(")[1][:-1])
+	else:
+		if (k > int(len(a))):
+			a.append(a[0])
+			a.pop(0)
+		else:
+			a .append(a[-k])
+			a.pop(-k-1)	
+for i in reversed(a):
+  print(i)
